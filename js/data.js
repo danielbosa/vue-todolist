@@ -2,7 +2,7 @@ export const todo = [
     {
         id: 1,
         text: 'costume da bagno',
-        done: true
+        done: false
     },
     {
         id: 2,

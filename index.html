@@ -15,18 +15,36 @@
 
 <body>
     <div id="app">
-        <header class="bg-light p-4">
+        <header class="bg-light p-4 d-flex justify-content-between">
             <!-- logo da prendere -->
-            <img src="" alt="">
+            <img src="./img/Myspace-logo.png" class="img-fluid" alt="">
+            <select class="" name="done" id="done" v-model="done">
+                <option value="true">Fatto</option>
+                <option value="false">Da fare</option>
+                <option value=""></option>
+            </select>
         </header>
         <main class="container bg-light my-4">
             <h1>Lista cose da portare al mare</h1>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item d-flex justify-content-between" v-for="(item, index) in todo" :key="item.id">
-                <span :class="{'text-decoration-line-through' : item.done}">{{item.text}}</span>
-                <span @click=""><i class="fa-solid fa-circle-xmark"></i></span>
+                <li class="list-group-item d-flex justify-content-between" v-for="(item, index) in filteredTodo" :key="item.id">
+                <span class="pointer" :class="{'text-decoration-line-through' : item.done}" @click="toggleDone(item.id)">
+                    {{item.text}}
+                </span>
+                <span class="pointer" @click="">
+                    <i class="fa-solid fa-circle-xmark" @click="removeItem(item.id)"></i>
+                </span>
                 </li>
             </ul>
+
+            <div>
+                <h2>Inserisci oggetto</h2>
+                <div class="mb-3">
+                    <!-- <label for="todotext" class="form-label">Inserici task2</label> -->
+                    <input type="email" class="form-control" id="todotext" v-model="itemText" @keyup.enter="addItem">
+                    <button class="btn btn-primary my-3" @click="addItem">Aggiungi</button>
+                </div>
+            </div>
         </main>
     </div>
 
